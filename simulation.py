@@ -12,14 +12,12 @@ screen = pygame.display.set_mode(window_size)
 G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
 earth_radius = 10
 sun_radius = 50
-mercury_radius = 5
 # Time step (s)
 dt = 3600
 
 bodies = np.array([
     np.array([1.9855e30,np.array([0,0]),np.array([0,0])]),
     np.array([5.9722e24,np.array([0,29.8e3]),np.array([149.6e9,0])]),
-    np.array([3.2850e23, np.array([0,47.87e3]), np.array([57.9e6,0])])
 ])
 def n_body(G, bodies, j, dt):
   # Calculate the net force on body 1
@@ -66,10 +64,6 @@ while running:
     x = min(max(x, earth_radius), window_size[0] - earth_radius)
     y = min(max(y, earth_radius), window_size[1] - earth_radius )
     pygame.draw.circle(screen, (173, 216, 230), (x,y), earth_radius, 0)
-    x_mercury, y_mercury = int(bodies[2][2][0] / 1e9 + window_size[0] / 2), int(bodies[2][2][1] / 1e9 + window_size[1] / 2)
-    x_mercury = min(max(x_mercury, mercury_radius), window_size[0] - mercury_radius)
-    y_mercury = min(max(y_mercury, mercury_radius), window_size[1] -  mercury_radius)
-    pygame.draw.circle(screen, (255, 255, 255), (x_mercury,y_mercury), mercury_radius, 0)
     pygame.display.update()
 
 pygame.quit()
